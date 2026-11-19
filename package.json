@@ -1,0 +1,22 @@
+{
+  "name": "codex2",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "openspec": "openspec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgemariocalvo/codex2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jorgemariocalvo/codex2/issues"
+  },
+  "homepage": "https://github.com/jorgemariocalvo/codex2#readme",
+  "devDependencies": {
+    "@fission-ai/openspec": "2.1.0"
+  }
+}
