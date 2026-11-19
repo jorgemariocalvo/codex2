@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#182e29">
+  <title>Comercial Aurora · Solicitudes</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.mjs"></script>
+</head>
+<body>
+  <header class="top">
+    <a href="/" class="brand"><span class="mark" aria-hidden="true">✦</span> Comercial Aurora</a>
+    <div id="account" hidden><span id="identity"></span><button id="logout" class="quiet">Cerrar sesión</button></div>
+  </header>
+  <main>
+    <section id="login" hidden>
+      <div class="login-intro"><h1>Atención al cliente</h1><p>Registra, asigna y da seguimiento a las solicitudes de Comercial Aurora.</p></div>
+      <form id="login-form" class="card login-card">
+        <h2>Iniciar sesión</h2>
+        <label>Usuario<input name="id" autocomplete="username" required maxlength="64"></label>
+        <label>Contraseña<input name="password" type="password" autocomplete="current-password" required maxlength="256"></label>
+        <button class="primary">Ingresar</button>
+        <p id="login-error" class="error" role="alert"></p>
+      </form>
+    </section>
+    <section id="work" hidden>
+      <div class="heading"><div><p class="section-label">Atención al cliente</p><h1>Solicitudes</h1></div>
+        <div class="actions"><button id="data-button" hidden>Datos del piloto</button><button id="new-button" class="primary">＋ Nueva solicitud</button></div></div>
+      <div id="stats" class="stats" aria-label="Resumen de solicitudes"></div>
+      <section class="card inbox">
+        <div class="inbox-heading"><h2>Bandeja de solicitudes</h2><button id="refresh" class="quiet">Actualizar</button></div>
+        <form id="filters" class="filters">
+          <label class="search">Buscar<input name="q" type="search" placeholder="Ticket, NIT o razón social"></label>
+          <label>Responsable<select name="agent" aria-label="Responsable"><option value="">Todos</option></select></label>
+          <label>Estado<select name="state" aria-label="Estado"><option value="">Todos</option></select></label>
+          <label>Plazo<select name="level" aria-label="Plazo"><option value="">Todos</option><option>En plazo</option><option>Preventivo</option><option>Urgente</option><option>Vencido</option><option>Atendido</option></select></label>
+        </form>
+        <div class="table-wrap"><table>
+          <thead><tr><th scope="col">Ticket / Cliente</th><th scope="col">Tipo de solicitud</th><th scope="col">Responsable</th><th scope="col">Estado</th><th scope="col">Plazo de atención</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table></div>
+        <div class="pagination"><span id="results"></span><div><button id="previous">Anterior</button><button id="next">Siguiente</button></div></div>
+      </section>
+    </section>
+    <p id="notice" role="status" hidden></p>
+  </main>
+  <dialog id="new-dialog">
+    <div class="dialog-heading"><h2>Nueva solicitud</h2><button type="button" class="quiet close" aria-label="Cerrar">×</button></div>
+    <form id="ticket-form">
+      <label>Buscar cliente por NIT o razón social<input id="client-query" type="search" autocomplete="off"></label>
+      <label>Cliente<select name="nit" aria-label="Cliente" required></select></label>
+      <div class="fields"><label>Canal<select name="channel" aria-label="Canal" required></select></label><label>Tipo<select name="type" aria-label="Tipo" required></select></label></div>
+      <label>Número de pedido (opcional)<input name="order_id" maxlength="100"></label>
+      <label>Descripción<textarea name="description" required minlength="10" maxlength="5000" rows="4"></textarea></label>
+      <p class="error" role="alert"></p><button class="primary">Guardar radicación</button>
+    </form>
+  </dialog>
+  <dialog id="detail-dialog">
+    <div class="dialog-heading"><h2 id="detail-title">Solicitud</h2><button type="button" class="quiet close" aria-label="Cerrar">×</button></div>
+    <div id="detail"></div>
+  </dialog>
+  <dialog id="data-dialog">
+    <div class="dialog-heading"><h2>Datos del piloto</h2><button type="button" class="quiet close" aria-label="Cerrar">×</button></div>
+    <form id="import-form">
+      <label>Importar clientes ficticios<input name="file" type="file" accept=".csv,.json" required></label>
+      <p class="muted">Usa los campos <code>nit</code> y <code>razon_social</code>. En JSON, conserva el NIT como texto.</p>
+      <div class="actions"><button>Validar archivo</button><button id="confirm-import" type="button" class="primary" hidden>Confirmar importación</button></div>
+      <div id="import-result" role="status"></div>
+    </form>
+    <p><a href="/api/export" download>Descargar datos del piloto en JSON</a></p>
+  </dialog>
+</body>
+</html>
